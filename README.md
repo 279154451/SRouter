@@ -1,11 +1,18 @@
 # SRouter
 手撸组件化框架
-使用规则：
+
+##使用规则：
+
 1、在各自组件中依赖注解和注解处理器模块
+
   implementation project(path: ':router-annotation')
+  
   implementation project(path: ':router-api')
+  
   annotationProcessor project(path: ':router-compiler') //依赖注解处理器才能让注解处理器工作
+  
   并在组件gradle中添加如下代码
+  
       defaultConfig {
        .......
         javaCompileOptions{
@@ -14,9 +21,12 @@
             }
         }
     }
+    
 2、组件Activity之间跳转
-@SRouter(path = "/login/LoginActivity")//通过注解定义路由Path
-public class LoginActivity extends AppCompatActivity {
+
+  @SRouter(path = "/login/LoginActivity")//通过注解定义路由Path
+
+  public class LoginActivity extends AppCompatActivity {
 
     @Parameter(name = "id")
     String userId;
@@ -40,7 +50,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 }
 3、跨组获取资源
+
   @SRouter(path = "/home/HomeActivity")
+  
 public class HomeActivity extends AppCompatActivity {
 
     @Parameter(name = "id")
@@ -70,8 +82,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 }
 资源提供者实现
+
 @SRouter(path = "/login/LoginDrawableRequest")
+
 public class LoginDrawableRequest implements ResourceRequest {
+
     @Override
     public int getResource(RequestType type, Context context,String sourceName) {
         switch (type){

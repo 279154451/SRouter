@@ -30,6 +30,7 @@ import javax.lang.model.type.TypeMirror;
  * 创建人：singleCode
  * 功能描述：
  **/
+
 public class MircoPluginWorker extends AbsProcessorWorker{
     @Override
     public void process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {

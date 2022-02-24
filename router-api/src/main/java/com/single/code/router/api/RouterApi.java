@@ -75,7 +75,7 @@ public class RouterApi {
     public Object navigation(Context context, RouterBundle bundle) {
         // 拼接 ARouter$$Group$order 才能找到
         // 例如：寻找 ARouter$Group$$personal
-        String packageName = "com.single.code."+group;
+        String packageName = RouterBean.ROUTER_DF_PKG+group;
         String groupClassName = packageName + "." + GROUP_FILE_NAME + group;
         Log.e(TAG, "navigation: groupClassName=" + groupClassName);
 
@@ -131,6 +131,9 @@ public class RouterApi {
                             intent.putExtras(bundle.getBundle()); // 携带参数
                             context.startActivity(intent, bundle.getBundle());
                             break;
+                        case REQUEST:
+                            Class<?> clazz = routerBean.getClazz();
+                            return clazz.newInstance();
                     }
                 }
             }

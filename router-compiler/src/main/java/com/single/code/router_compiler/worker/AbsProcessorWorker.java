@@ -42,7 +42,7 @@ public abstract class AbsProcessorWorker {
         moduleName = processingEnv.getOptions().get(RouterConfig.MODULE_NAME);
         aptPackageName= processingEnv.getOptions().get(RouterConfig.APT_PKG_NAME);
         if(StringUtils.isEmpty(aptPackageName)){
-            aptPackageName = "com.single.code."+moduleName;
+            aptPackageName = RouterConfig.ROUTER_DF_PKG+moduleName;
         }
         routerUtils = new RouterUtils(logger,elementUtils,types,moduleName);
         if(!StringUtils.isEmpty(value)){

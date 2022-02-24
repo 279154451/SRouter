@@ -8,8 +8,10 @@ import javax.lang.model.element.Element;
  * 功能描述：
  **/
 public class RouterBean {
+    public static final String ROUTER_DF_PKG = "com.single.code.";
     public enum TypeEnum{
-        ACTIVITY
+        ACTIVITY,
+        REQUEST
     }
     public static class Builder{
         private String path;

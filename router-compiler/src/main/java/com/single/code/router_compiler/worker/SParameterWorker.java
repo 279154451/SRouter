@@ -63,6 +63,8 @@ public class SParameterWorker extends AbsProcessorWorker {
 
     private void createParameterFile() throws IOException {
         if (!parameterMap.isEmpty()) {
+            TypeElement request = elementUtils.getTypeElement(RouterConfig.REQUEST_API);
+            TypeMirror requestType = request.asType();
             TypeElement activity = elementUtils.getTypeElement(RouterConfig.ACTIVITY_PACKAGE);
             TypeElement parameterType = elementUtils.getTypeElement(RouterConfig.PARAMETER_API);
             ParameterSpec parameterSpec = ParameterSpec.builder(TypeName.OBJECT, RouterConfig.PARAMETER_TARGET_VAR).build();
@@ -94,9 +96,12 @@ public class SParameterWorker extends AbsProcessorWorker {
                             if(fieldType.toString().equalsIgnoreCase(RouterConfig.STRING)){
                                 //String 类型
                                 getMethodContent += "getStringExtra($S)";
+                            }else if(types.isSubtype(fieldType,requestType)){
+                                getMethodContent =  finalValue+"=($T) $T.getManager().build($S).navigation(t)";
+                                methodBuilder.addStatement(getMethodContent, fieldType,ClassName.get(RouterConfig.API_PACKAGE,RouterConfig.ROUTER_API),annotationName);
                             }
                         }
-                        if(getMethodContent.endsWith(")")){
+                        if(getMethodContent.contains("getIntent")&&getMethodContent.endsWith(")")){
                             methodBuilder.addStatement(getMethodContent,annotationName);
                         }else {
                             logger.warning("only support String、int、boolean Parameter Type");

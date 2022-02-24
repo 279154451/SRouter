@@ -36,12 +36,15 @@ public class RouterUtils {
         }
         TypeMirror elementType = bean.getElement().asType();
         TypeElement activity = elementUtils.getTypeElement(RouterConfig.ACTIVITY_PACKAGE);
+        TypeElement request = elementUtils.getTypeElement(RouterConfig.REQUEST_API);
         TypeMirror activityType = activity.asType();
-        if(!types.isSubtype(elementType,activityType)){
-            logger.warning("SRouter 注解只能在Activity上使用");
-            return false;
-        }else {
+        TypeMirror requestType = request.asType();
+        if(types.isSubtype(elementType,activityType)){
             bean.setTypeEnum(RouterBean.TypeEnum.ACTIVITY);
+        }else if(types.isSubtype(elementType,requestType)){
+            bean.setTypeEnum(RouterBean.TypeEnum.REQUEST);
+        }else {
+            logger.warning("SRouter only can use over Activity or Request");
         }
         String path = bean.getPath();
         String group = bean.getGroup();

@@ -18,7 +18,17 @@ public class LoginDrawableRequest implements ResourceRequest {
             case DRAWABLE:
                 int drawableId = context.getResources().getIdentifier(sourceName, "drawable", context.getPackageName());
                 return drawableId;
+            case COLOR:
+                int colorId = context.getResources().getIdentifier(sourceName, "color", context.getPackageName());
+                return colorId;
+            case STRING:
+                int stringId = context.getResources().getIdentifier(sourceName, "string", context.getPackageName());
+                return stringId;
+            case LAYOUT:
+                int layoutId = context.getResources().getIdentifier(sourceName, "layout", context.getPackageName());
+                return layoutId;
         }
+        new RuntimeException("未找到对应资源");
         return 0;
     }
 }

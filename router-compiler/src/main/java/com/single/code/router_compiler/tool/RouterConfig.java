@@ -29,5 +29,5 @@ public interface RouterConfig {
     String STRING = "java.lang.String";
     String ROUTER_API ="RouterApi";
     String ROUTER_DF_PKG= RouterBean.ROUTER_DF_PKG;
-
+    String SERIALIZABLE = "java.io.Serializable";
 }

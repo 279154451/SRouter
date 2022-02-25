@@ -129,7 +129,7 @@ public class RouterApi {
                         case ACTIVITY:
                             Intent intent = new Intent(context, routerBean.getClazz()); // 例如：getClazz == Order_MainActivity.class
                             intent.putExtras(bundle.getBundle()); // 携带参数
-                            context.startActivity(intent, bundle.getBundle());
+                            context.startActivity(intent);
                             break;
                         case REQUEST:
                             Class<?> clazz = routerBean.getClazz();

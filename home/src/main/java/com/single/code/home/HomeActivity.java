@@ -16,6 +16,8 @@ import com.single.code.router.api.Request;
 import com.single.code.router.api.ResourceRequest;
 import com.single.code.router.api.RouterApi;
 
+import java.io.Serializable;
+
 @SRouter(path = "/home/HomeActivity")
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,12 +25,13 @@ public class HomeActivity extends AppCompatActivity {
     String userId;
     @Parameter
     int count;
-    @Parameter(name = "/login/LoginDrawableRequest")
+    @Parameter(name = "/login/LoginDrawableRequest")//name为资源提供者路由
     ResourceRequest resourceRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Serializable serializableExtra = getIntent().getSerializableExtra("");
         ParameterManager.getManager().loadParameter(this);
         Log.e("houqing","HomeActivity userid="+userId+" count="+count);
         Button btn_main = findViewById(R.id.btn_main);
